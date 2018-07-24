@@ -18,4 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/new_trip', 'TripController@newTrip');
+
+Route::resource('trips', 'TripController')->only([
+    'create', 'store', 'show'
+]);

@@ -17,6 +17,11 @@ class CreateTripsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('type');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->integer('ele');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
