@@ -11,4 +11,8 @@ class Trip extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+
+    public function trip_type() {
+        return $this->hasOne(TripType::class);
+    }
 }

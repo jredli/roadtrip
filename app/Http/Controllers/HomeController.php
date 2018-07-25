@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,8 +27,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
+        $trips = Trip::where('user_id', $user->id)->get();
 
-
-        return view('home');
+        return view('home', compact('trips'));
     }
 }

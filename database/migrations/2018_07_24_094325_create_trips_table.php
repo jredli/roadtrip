@@ -16,7 +16,8 @@ class CreateTripsTable extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('type');
+            $table->unsignedInteger('trip_type_id');
+            $table->foreign('trip_type_id')->references('id')->on('trip_types');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });

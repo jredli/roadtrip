@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Coordinate;
 use App\Trip;
+use App\TripType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,8 @@ class TripController extends Controller
      */
     public function create()
     {
-        return view('new_trip');
+        $types = TripType::pluck('name', 'id')->all();
+        return view('new_trip', compact('types'));
     }
 
     /**
@@ -43,8 +45,8 @@ class TripController extends Controller
 
         $trip = Trip::create([
             'name' => $request->name,
+            'trip_type_id' => $request->type_id,
             'user_id' => $user->id,
-            'type' => $request->type,
         ]);
 
         foreach ($gpx->trk->trkseg->trkpt as $child) {
@@ -61,7 +63,6 @@ class TripController extends Controller
         }
 
         $user->trips()->save($trip);
-
 
         return redirect()->route('trips.create');
     }

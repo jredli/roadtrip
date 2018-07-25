@@ -11,8 +11,8 @@
            {!! Form::label('name', 'Trip name') !!}
            {!! Form::text('name', null, ['class' => 'form-control']) !!}
 
-           {!! Form::label('type', 'Type name') !!}
-           {!! Form::text('type', null, ['class' => 'form-control']) !!}
+           {!! Form::label('type') !!}
+           {!! Form::select('type_id', $types, null, ['class' => 'form-control']) !!}
 
            {!! Form::label('roadtrip', 'Upload .gpx file') !!}
            {!! Form::file('roadtrip', ['class' => 'form-control']) !!}

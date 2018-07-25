@@ -15,12 +15,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
+          @foreach($trips as $trip)
+            <tr>
+              <th scope="row">{{ $trip->id }}</th>
+              <td>{{ $trip->name }}</td>
+              <td>{{ $trip->type->name }}</td>
+              <td>{{ $trip->name }}</td>
+            </tr>
+          @endforeach
           </tbody>
         </table>
       </div>
