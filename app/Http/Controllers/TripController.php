@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Coordinate;
 use App\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,13 +39,28 @@ class TripController extends Controller
     {
         $user = Auth::user();
 
+        $gpx = simplexml_load_file($request->roadtrip);
+
         $trip = Trip::create([
             'name' => $request->name,
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'type' => $request->type,
         ]);
 
-        $user->trips()->save($trip);
+        foreach ($gpx->trk->trkseg->trkpt as $child) {
+            $lon = (double) $child['lon'];
+            $lat = (double) $child['lat'];
+            $ele = (double) $child->ele;
 
+            Coordinate::create([
+                'lon' => $lon,
+                'lat' => $lat,
+                'ele' => $ele,
+                'trip_id' => $trip->id,
+            ]);
+        }
+
+        $user->trips()->save($trip);
 
 
         return redirect()->route('trips.create');

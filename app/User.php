@@ -28,6 +28,6 @@ class User extends Authenticatable
     ];
 
     public function trips(){
-        return $this->hasMany('Trip');
+        return $this->hasMany(Trip::class);
     }
 }
