@@ -19,7 +19,7 @@
             <tr>
               <th scope="row">{{ $trip->id }}</th>
               <td>{{ $trip->name }}</td>
-              <td>{{ $trip->type->name }}</td>
+              <td>{{ $trip->trip_type->name }}</td>
               <td>{{ $trip->name }}</td>
             </tr>
           @endforeach

@@ -13,6 +13,6 @@ class Trip extends Model
     protected $guarded = [];
 
     public function trip_type() {
-        return $this->hasOne(TripType::class);
+        return $this->belongsTo(TripType::class);
     }
 }
